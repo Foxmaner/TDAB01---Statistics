@@ -1,0 +1,39 @@
+---
+title: "Lab 1"
+author: "Namn 1 (liu-id 1) och Namn 2 (liu-id 2)"
+date: '20XX-XX-XX'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exempeluppgift 1
+
+### a) Simulera tal från normal- och exponentialfördelningen 
+
+Nedan simuleras normalfördelningen med olika antalet dragningar, samt ett histogram av dragningarna från normal-fördelningen.
+
+```{r }
+x1 <- rnorm(100, mean = 10, sd = 4)
+x2 <- rexp(100, rate=5)
+hist(x1)
+```
+
+Notera att om ni sätter echo=FALSE så visas ingen kod, utan endast output från koden:
+
+```{r, echo=FALSE}
+x1 <- rnorm(100, mean = 10, sd = 4)
+x2 <- rexp(100, rate=5)
+hist(x1)
+```
+
+Det går också bra att skriva matematiska formler som ni gör i LaTeX: $\mathbb{E}(X) = \sum_x x\cdot p_X(x)$, eller
+\[
+f_X(x) = \begin{cases}
+Cx^3 \text{ om } 0\leq x \leq 4 \\ 
+0 \text{ annars}
+\end{cases}
+\]
+
