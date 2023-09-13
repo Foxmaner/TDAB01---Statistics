@@ -83,7 +83,7 @@ Kontinuerliga fördelningar
 ```{r }
 y1 <- runif(10000,0,1)
 hist(y1, probability = TRUE)
-xfit <- seq(min(y1), max(y1), 1)
+xfit <- seq(min(y1), max(y1), 0.01)
 yfit <- dunif(xfit, min = 0, max = 1 )
 points(xfit, yfit, col="green")
 
@@ -113,15 +113,43 @@ lines(xfit, yfit, col="green")
 
 y6 <- rbeta(10000,1,1)
 hist(y6, probability = TRUE)
-xfit <- seq(min(y6), max(y6), 1)
+xfit <- seq(min(y6), max(y6), 0.01)
 yfit <- dbeta(xfit,shape1 = 1,shape2 =1)
 lines(xfit, yfit, col="green")
 
 y7 <- rbeta(10000,10,5)
 hist(y7, probability = TRUE)
-xfit <- seq(min(y7), max(y7), 1)
+xfit <- seq(min(y7), max(y7), 0.01)
 yfit <- dbeta(xfit,shape1 = 10,shape2 =5)
 lines(xfit, yfit, col="green")
 
 ```
 
+## Uppgift 3.1.3
+
+## Relation mellan fördelningar. Nedan finns två stycken sannolikhetsfördelningar som konvergerar mot andra sannolikhetsfördelningar.
+
+X ∼ Binomial(n = 10000, p = 0.001)
+
+Y ∼ Student-t(ν = 10000)
+
+#### (1) Simulera 1000 värden från respektive fördelning och visualisera fördelningen i ett histogram tillsammans med fördelningens täthetsfunktionen.
+
+```{r }
+x1 <- rbinom(n= 10000, prob = 0.001, size = 1000)
+hist(x1, probability = TRUE)
+xfit <- seq(min(x1), max(x1), 0.01)
+yfit <- dbern(xfit, prob = 0.2)
+points(xfit, yfit, col="green")
+
+x2 <- rt(n=10000, df=1000)
+hist(x2, probability = TRUE)
+xfit <- seq(min(x2), max(x2), 1)
+yfit <- dbinom(xfit, size = 10000, prob = 0.1)
+lines(xfit, yfit, col="green")
+
+```
+
+#### (2) Ta reda på (t ex via Wikipedia eller föreläsningarnas slides) vilken annan fördelning som respektive fördelning börjar konvergera mot.
+
+#### (3) Simulera dragningar från dessa fördelning och jämför resultatet med de resultat du fick i (1).
