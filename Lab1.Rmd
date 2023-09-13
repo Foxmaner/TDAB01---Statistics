@@ -7,33 +7,71 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(Rlab)
 ```
 
-## Exempeluppgift 1
+## Uppgift 3.1.1
 
-### a) Simulera tal från normal- och exponentialfördelningen 
+### Simulering av normalfördelning. Simulera 100 och 10000 dragningar från en normalfördelning med μ = 10 och σ = 4.
+
+#### 1) Visualisera fördelningarna i två histogram. Visualisera fördelningens pdf i samma graf.
 
 Nedan simuleras normalfördelningen med olika antalet dragningar, samt ett histogram av dragningarna från normal-fördelningen.
 
 ```{r }
-x1 <- rnorm(100, mean = 10, sd = 4)
-x2 <- rexp(100, rate=5)
+x1 <- rnorm(1000, mean = 10, sd = 4)
+x2 <- rnorm(100, mean = 10, sd = 4)
 hist(x1)
+hist(x2)
 ```
 
-Notera att om ni sätter echo=FALSE så visas ingen kod, utan endast output från koden:
+#### 2) Beskriv skillnaden mellan de olika graferna.
 
-```{r, echo=FALSE}
-x1 <- rnorm(100, mean = 10, sd = 4)
-x2 <- rexp(100, rate=5)
+I graf har fler dragningar, vilket gör att den är mer stabil mellan körningar. Den närmar sig mer normalfördelningen.
+
+## Uppgift 3.1.2
+
+## Simulera och visualisera andra fördelningar.
+
+#### 1) Simulera och visualisera följande fördelningar med 10000 dragningar från varje fördelningens täthetsfunktioner
+
+Diskreta fördelningar
+
+```{r }
+x1 <- rbern(10000, 0.2)
+x2 <- rbinom(20,10000,0.1)
+x3 <- rbinom(20,10000,0.5)
+x4 <- rgeom(10000, 0.1)
+x5 <- rpois(10000,10)
 hist(x1)
+hist(x2)
+hist(x3)
+hist(x4)
+hist(x5)
 ```
 
-Det går också bra att skriva matematiska formler som ni gör i LaTeX: $\mathbb{E}(X) = \sum_x x\cdot p_X(x)$, eller
-\[
+Kontinuerliga fördelningar
+
+```{r }
+y1 <- runif(10000,0,1)
+y2 <- rexp(10000,3)
+y3 <- rgamma(10000,2,1)
+y4 <- rt(10000,3)
+y5 <- rbeta(10000,0.1,0.1)
+y6 <- rbeta(10000,1,1)
+y7 <- rbeta(10000,10,5)
+hist(y1)
+hist(y2)
+hist(y3)
+hist(y4)
+hist(y5)
+hist(y6)
+hist(y7)
+```
+
+Det går också bra att skriva matematiska formler som ni gör i LaTeX: $\mathbb{E}(X) = \sum_x x\cdot p_X(x)$, eller $$
 f_X(x) = \begin{cases}
 Cx^3 \text{ om } 0\leq x \leq 4 \\ 
 0 \text{ annars}
 \end{cases}
-\]
-
+$$
