@@ -20,9 +20,18 @@ Nedan simuleras normalfördelningen med olika antalet dragningar, samt ett histo
 
 ```{r }
 x1 <- rnorm(1000, mean = 10, sd = 4)
+
+hist(x1, probability = TRUE)
+xfit <- seq(min(x1), max(x1), 1)
+yfit <- dnorm(xfit, mean = 10, sd = 4 )
+lines(xfit, yfit, col="green")
+
 x2 <- rnorm(100, mean = 10, sd = 4)
-hist(x1)
-hist(x2)
+hist(x2, probability = TRUE)
+xfit <- seq(min(x2), max(x2), 1)
+yfit <- dnorm(xfit, mean = 10, sd = 4 )
+lines(xfit, yfit, col="green")
+
 ```
 
 #### 2) Beskriv skillnaden mellan de olika graferna.
@@ -39,39 +48,80 @@ Diskreta fördelningar
 
 ```{r }
 x1 <- rbern(10000, 0.2)
+hist(x1, probability = TRUE, breaks=c(-0.5,0.5,1.5))
+xfit <- seq(min(x1), max(x1), 1)
+yfit <- dbern(xfit, prob = 0.2)
+points(xfit, yfit, col="green")
+
 x2 <- rbinom(20,10000,0.1)
+hist(x2, probability = TRUE)
+xfit <- seq(min(x2), max(x2), 1)
+yfit <- dbinom(xfit, size = 10000, prob = 0.1)
+lines(xfit, yfit, col="green")
+
 x3 <- rbinom(20,10000,0.5)
+hist(x3, probability = TRUE)
+xfit <- seq(min(x3), max(x3), 1)
+yfit <- dbinom(xfit, size = 10000, prob = 0.5)
+lines(xfit, yfit, col="green")
+
 x4 <- rgeom(10000, 0.1)
+hist(x4, probability = TRUE)
+xfit <- seq(min(x4), max(x4), 1)
+yfit <- dgeom(xfit, prob = 0.1 )
+lines(xfit, yfit, col="green")
+
 x5 <- rpois(10000,10)
-hist(x1)
-hist(x2)
-hist(x3)
-hist(x4)
-hist(x5)
+hist(x5, probability = TRUE)
+xfit <- seq(min(x5), max(x5), 1)
+yfit <- dpois(xfit, lambda= 10)
+lines(xfit, yfit, col="green")
 ```
 
 Kontinuerliga fördelningar
 
 ```{r }
 y1 <- runif(10000,0,1)
+hist(y1, probability = TRUE)
+xfit <- seq(min(y1), max(y1), 1)
+yfit <- dunif(xfit, min = 0, max = 1 )
+points(xfit, yfit, col="green")
+
 y2 <- rexp(10000,3)
+hist(y2, probability = TRUE)
+xfit <- seq(min(y2), max(y2), 1)
+yfit <- dexp(xfit, rate = 3)
+lines(xfit, yfit, col="green")
+
 y3 <- rgamma(10000,2,1)
+hist(y3, probability = TRUE)
+xfit <- seq(min(y3), max(y3), 1)
+yfit <- dgamma(xfit, shape = 2, rate = 1 )
+lines(xfit, yfit, col="green")
+
 y4 <- rt(10000,3)
-y5 <- rbeta(10000,0.1,0.1)
+hist(y4, probability = TRUE)
+xfit <- seq(min(y4), max(y4), 1)
+yfit <- dt(xfit, df = 3)
+lines(xfit, yfit, col="green")
+
+y5 <- rbeta(10000,shape1=0.1,shape2=0.1)
+hist(y5, probability = TRUE)
+xfit <- seq(min(y5), max(y5), 0.01)
+yfit <- dbeta(xfit,shape1=0.1,shape2=0.1)
+lines(xfit, yfit, col="green")
+
 y6 <- rbeta(10000,1,1)
+hist(y6, probability = TRUE)
+xfit <- seq(min(y6), max(y6), 1)
+yfit <- dbeta(xfit,shape1 = 1,shape2 =1)
+lines(xfit, yfit, col="green")
+
 y7 <- rbeta(10000,10,5)
-hist(y1)
-hist(y2)
-hist(y3)
-hist(y4)
-hist(y5)
-hist(y6)
-hist(y7)
+hist(y7, probability = TRUE)
+xfit <- seq(min(y7), max(y7), 1)
+yfit <- dbeta(xfit,shape1 = 10,shape2 =5)
+lines(xfit, yfit, col="green")
+
 ```
 
-Det går också bra att skriva matematiska formler som ni gör i LaTeX: $\mathbb{E}(X) = \sum_x x\cdot p_X(x)$, eller $$
-f_X(x) = \begin{cases}
-Cx^3 \text{ om } 0\leq x \leq 4 \\ 
-0 \text{ annars}
-\end{cases}
-$$
