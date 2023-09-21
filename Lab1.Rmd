@@ -1,7 +1,7 @@
 ---
 title: "Lab 1"
-author: "Namn 1 (liu-id 1) och Namn 2 (liu-id 2)"
-date: '20XX-XX-XX'
+author: "Björn Edblom (bjoed735) och Eskil Brännerud (eskbr129)"
+date: '2023-09-21'
 output: pdf_document
 ---
 
