@@ -12,7 +12,7 @@ library(Rlab)
 
 ## Uppgift 3.1.1
 
-### Simulering av normalfördelning. Simulera 100 och 10000 dragningar från en normalfördelning med μ = 10 och σ = 4.
+### Simulering av normalfördelning. Simulera 100 och 10000 dragningar från en normalfördelning med u = 10 och o = 4.
 
 #### 1) Visualisera fördelningarna i två histogram. Visualisera fördelningens pdf i samma graf.
 
@@ -127,13 +127,8 @@ lines(xfit, yfit, col="green")
 
 ## Uppgift 3.1.3
 
-## Relation mellan fördelningar. Nedan finns två stycken sannolikhetsfördelningar som konvergerar mot andra sannolikhetsfördelningar.
 
-X ∼ Binomial(n = 10000, p = 0.001)
-
-Y ∼ Student-t(ν = 10000)
-
-#### (1) Simulera 1000 värden från respektive fördelning och visualisera fördelningen i ett histogram tillsammans med fördelningens täthetsfunktionen.
+#### (1)
 
 ```{r }
 x1 <- rbinom(n= 10000, size = 1000 ,prob = 0.001 )
@@ -176,9 +171,9 @@ Vi simulerade, och det är tydligt att de är väldigt lika.
 
 ## Uppgift 3.1.4
 
-## Analytisk sannolikhet och approximation med Monte Carlo metoder. Varje fördelning i R har också en funktion för att beräkna sannolikheten direkt. På samma sätt som funktioner simulerar värden med prefixet r har vi den kumulativa fördelningsfunktionen med prefixet p och täthetfunktionen med prefixet d. I denna uppgift ska vi arbeta med två fördelningar X ∼ N (μ = 0, σ = 1) Y ∼ Bin(n = 10, p = 0.1)
 
-#### 1) Använd täthetsfunktionen i R för att beräkna PPP (Y = 0). Simulera nu 10000 dragningar från Y och beräkna andelen dragningar där y = 0
+
+#### 1) 
 
 ```{r }
 x <- dbinom(0, size=10, prob = 0.1)
@@ -188,7 +183,7 @@ print(paste("Simulated 10000 times", mean(y==0)))
 
 ```
 
-#### 2) Använd nu den kumulativa fördelningsfunktionen i R för att beräkna följande sanno-likheter. ● PPP (X \< 0) ● PPP (−1 \< X \< 1) ● PPP (1.96 \< X) ● PPP (0 \< Y \< 10) ● PPP (Y = 0) ● PPP (0 ≤ Y ≤ 10)
+#### 2) 
 
 ```{r }
 #P(X<0)
@@ -266,7 +261,7 @@ print(sum(x_new) / 10000)
 
 ### (2)
 
-###Vad ar sannolikheten att det nuvarande systemet genererar f ¨ arre fel ¨ an det nya syste- ¨met?
+
 
 ```{r }
 print(sum(x_old > x_new)/10000)
@@ -274,7 +269,7 @@ print(sum(x_old > x_new)/10000)
 
 ### (3)
 
-### Vad ar sannolikheten att du kommer f ¨ a fler ˚ an 50 fel i respektive system?
+
 
 ```{r }
 print(sum(x_old > 50)/10000)
