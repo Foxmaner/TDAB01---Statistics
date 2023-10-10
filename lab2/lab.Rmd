@@ -1,0 +1,130 @@
+### Uppgift 3.1.1
+
+```{r }
+  set.seed(4711)
+  x1 <- rgamma(n=10, shape = 4, scale = 1)
+  x2 <- rgamma(n=100, shape = 4, scale = 1)
+
+```
+
+## (1).
+```{r }
+  
+  llgama <- function(x, alpha, beta){
+    return((alpha - 1) * sum(log(x)) - (beta*sum(x)) +  length(x) * (alpha * log(beta) - lgamma(alpha)))
+  }
+  print(llgama(x1,2,2))
+  
+
+```
+## (2).
+
+```{r }
+  alpha <- 4
+  beta_values <- seq(0.01, 3, 0.01)
+  #create an array
+  y1 <- numeric(0)
+  for(beta in beta_values){
+    y1 <- c(y1, llgama(x1, alpha, beta))
+  }
+  y2 <- numeric(0)
+  for(beta in beta_values){
+    y2 <- c(y2, llgama(x2, alpha, beta))
+  }
+  plot(beta_values,y1)
+  plot(beta_values,y2)
+
+
+```
+
+## (3).
+
+```{r }
+  alpha_values <- seq(0.01, 10, 0.01)
+  beta <- 1
+  #create an array
+  y1 <- numeric(0)
+  for(alpha in alpha_values){
+    y1 <- c(y1, llgama(x1, alpha, beta))
+  }
+  y2 <- numeric(0)
+  for(alpha in alpha_values){
+    y2 <- c(y2, llgama(x2, alpha, beta))
+  }
+  plot(alpha_values,y1)
+  plot(alpha_values,y2)
+
+
+```
+## (4 ).
+
+```{r }
+llnorm <- function(x,mu,sigma2){
+  n <- length(x)
+  return((-n/2)*log(2*pi*sigma2)+(-1/(2*sigma2)*sum((x-mu)^2)))
+}
+print(llnorm(x=x1,mu=2,sigma2=1))
+
+
+
+```
+
+## (5 ).
+
+```{r }
+sigma2 <- 1
+mu_seq <- seq(0, 10, 0.01)
+y1 <- numeric(0)
+for ( mu in mu_seq) {
+  y1 <- c(y1, llnorm(x1, mu, sigma2))
+  
+  }
+
+y2 <- numeric(0)
+for ( mu in mu_seq) {
+  y2 <- c(y2, llnorm(x1, mu, sigma2))
+  
+  }
+
+plot(mu_seq,y1)
+plot(mu_seq,y2)
+
+############################################################################################################################################################################
+```
+
+```{r}
+    sigma2 <- 1
+    mu_seq <- seq(0, 10, 0.01)
+    y1 <- numeric(0)
+    for (mu in mu_seq) {
+        y1 <- c(y1, llnorm(x = x1, mu = mu, sigma2 = sigma2))
+    }
+    y2 <- numeric(0)
+    for (mu in mu_seq) {
+        y2 <- c(y2, llnorm(x = x2, mu = mu, sigma2 = sigma2))
+    }
+```
+```{r, echo=FALSE}
+    plot(mu_seq, y1)
+    mu_max_x1 <- mu_seq[which.max(y1)]
+    print(paste("max value at alpha =", mu_max_x1))
+    plot(mu_seq, y2)
+    mu_max_x2 <- mu_seq[which.max(y2)]
+    print(paste("max value at alpha =", mu_max_x2))
+```
+```{r}
+    y1 <- dgamma(x1, shape = alpha_max_x1, scale = beta_max_x1)
+    hist(y1)
+    y2 <- dgamma(x2, shape = alpha_max_x2, scale = beta_max_x2)
+    hist(y2)
+
+    y3 <- dnorm(x1, mean = mu_max_x1, sd = 1)
+    hist(y3)
+    y4 <- dnorm(x2, mean = mu_max_x2, sd = 1)
+    hist(y4)
+
+    hist(x1)
+    hist(x2)
+```
+
+
