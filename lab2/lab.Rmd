@@ -177,3 +177,29 @@ print(norm_sigma2_mle(y10000))
 
 #Visar att fler dragningar i norm_mu_mle(x) gör att värdet närmar sig medelvärdet/variansen
 ```
+##3.3.1
+###1
+```{r }
+  log_likelihood_beta <- function(params, data) {
+    alpha <- params[1]
+    beta <- params[2]
+    log_likelihood <- sum(dbeta(data, shape1 = alpha, shape2 = beta, log = TRUE))
+    return(-log_likelihood)  # Returnera negativt värde eftersom optim() minimiserar
+  }
+
+
+```
+###2
+```{r }
+  simulated_data <- rbeta(100, shape1 = 0.2, shape2 = 2)
+  hist(simulated_data)
+```
+###3
+```{r }
+    opt_res <- optim(par = c(1, 1), fn = log_likelihood_beta, x = simulated_data, method = "L-BFGS-B", lower = 0.000001)
+    print(opt_res$par)
+```
+
+##3.4.1
+###1
+###2
