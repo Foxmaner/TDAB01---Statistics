@@ -175,5 +175,5 @@ print(norm_sigma2_mle(y10))
 print(norm_mu_mle(y10000))
 print(norm_sigma2_mle(y10000))
 
+#Visar att fler dragningar i norm_mu_mle(x) gör att värdet närmar sig medelvärdet/variansen
 ```
-
