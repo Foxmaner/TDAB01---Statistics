@@ -2,8 +2,8 @@
 
 ```{r }
   set.seed(4711)
-  x1 <- rgamma(n=10, shape = 4, scale = 1)
-  x2 <- rgamma(n=100, shape = 4, scale = 1)
+  x1 <<- rgamma(n=10, shape = 4, scale = 1)
+  x2 <<- rgamma(n=100, shape = 4, scale = 1)
 
 ```
 
@@ -126,5 +126,54 @@ plot(mu_seq,y2)
     hist(x1)
     hist(x2)
 ```
+## 3.2.1
+```{r }
+gamma_beta_mle <- function(x,alpha){
+  n<-length(x)
+  a<-alpha
+  coolSum <- n*a*(sum(unlist(x)))^-1;
+  
 
+  return(coolSum)
+}
+print(gamma_beta_mle(x1,2))
+
+```
+```{r }
+#1
+test_x <- 1:10
+norm_mu_mle <- function(x){
+  n<-length(x)
+  coolSum <- (1/n)*sum(unlist(x));
+  return(coolSum)
+}
+
+
+norm_sigma2_mle <- function(x){
+  xMean <- mean(unlist(x))
+  coolSum = 0
+  for(i in x){
+      
+      coolSum = coolSum + ((i-xMean)^2)
+  }
+  return((1/length(x))*coolSum)
+
+  }
+
+
+print(norm_mu_mle(test_x))
+print(norm_sigma2_mle(test_x))
+
+#2 
+set.seed(42)
+y10 <- rnorm(10,10,2)
+y10000 <- rnorm(10000,10,2)
+
+print("Uppgift 2")
+print(norm_mu_mle(y10))
+print(norm_sigma2_mle(y10))
+print(norm_mu_mle(y10000))
+print(norm_sigma2_mle(y10000))
+
+```
 
