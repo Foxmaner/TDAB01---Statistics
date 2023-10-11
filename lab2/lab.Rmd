@@ -90,7 +90,7 @@ for ( mu in mu_seq) {
 
 y2 <- numeric(0)
 for ( mu in mu_seq) {
-  y2 <- c(y2, llnorm(x1, mu, sigma2))
+  y2 <- c(y2, llnorm(x2, mu, sigma2))
   
   }
 
@@ -99,6 +99,7 @@ plot(mu_seq,y2)
 
 ############################################################################################################################################################################
 ```
+Genom att kolla på grafen ser första ut som en standardföredlning och den andra ser ut som en gammafördelning 
 
 ```{r}
     sigma2 <- 1
@@ -134,6 +135,7 @@ plot(mu_seq,y2)
     hist(x1)
     hist(x2)
 ```
+
 ## 3.2.1
 ```{r }
 gamma_beta_mle <- function(x,alpha){
@@ -147,6 +149,9 @@ gamma_beta_mle <- function(x,alpha){
 print(gamma_beta_mle(x1,2))
 
 ```
+För x1 så maximeras chansen för att få dessa värden då beta är 0.768
+För x2 så maximeras chansen för att få dessa värden då beta är 0.961
+
 ```{r }
 #1
 test_x <- 1:10
@@ -172,6 +177,9 @@ norm_sigma2_mle <- function(x){
 print(norm_mu_mle(test_x))
 print(norm_sigma2_mle(test_x))
 
+```
+
+```{r }
 #2 
 set.seed(42)
 y10 <- rnorm(10,10,2)
@@ -185,6 +193,7 @@ print(norm_sigma2_mle(y10000))
 
 #Visar att fler dragningar i norm_mu_mle(x) gör att värdet närmar sig medelvärdet/variansen
 ```
+
 ##3.3.1
 ###1
 ```{r }
