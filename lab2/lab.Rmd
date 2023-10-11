@@ -1,3 +1,9 @@
+---
+title: "Lab 2"
+author: "Björn Edblom (bjoed735) och Eskil Brännerud (eskbr129)"
+date: '2023-10-11'
+output: pdf_document
+---
 ### Uppgift 3.1.1
 
 ```{r }
@@ -32,11 +38,11 @@
     y2 <- c(y2, llgama(x2, alpha, beta))
   }
     plot(beta_values, y1)
-    max1 <- beta_values[which.max(y1)]
-    print(paste("Max värde =", max1))
+    b_max1 <- beta_values[which.max(y1)]
+    print(paste("Max värde =", b_max1))
     plot(beta_values, y2)
-    max2 <- beta_values[which.max(y2)]
-    print(paste("Max värde =", max2))
+    b_max2 <- beta_values[which.max(y2)]
+    print(paste("Max värde =", b_max2))
     
 
 ```
@@ -56,11 +62,11 @@
     y2 <- c(y2, llgama(x2, alpha, beta))
   }
     plot(alpha_values, y1)
-    max1 <- alpha_values[which.max(y1)]
-    print(paste("Max värde =", max1))
+    a_max1 <- alpha_values[which.max(y1)]
+    print(paste("Max värde =", a_max1))
     plot(alpha_values, y2)
-    max2 <- alpha_values[which.max(y2)]
-    print(paste("Max värde =", max2))
+    a_max2 <- alpha_values[which.max(y2)]
+    print(paste("Max värde =", a_max2))
 
 
 ```
@@ -113,23 +119,24 @@ Genom att kolla på grafen ser första ut som en standardföredlning och den and
         y2 <- c(y2, llnorm(x = x2, mu = mu, sigma2 = sigma2))
     }
 ```
-```{r, echo=FALSE}
-    plot(mu_seq, y1)
-    mu_max_x1 <- mu_seq[which.max(y1)]
-    print(paste("max value at alpha =", mu_max_x1))
-    plot(mu_seq, y2)
-    mu_max_x2 <- mu_seq[which.max(y2)]
-    print(paste("max value at alpha =", mu_max_x2))
-```
+
 ```{r}
-    y1 <- dgamma(x1, shape = alpha_max_x1, scale = beta_max_x1)
+    plot(mu_seq, y1)
+    m_max1 <- mu_seq[which.max(y1)]
+    print(paste("Max värde =", m_max1))
+    plot(mu_seq, y2)
+    m_max2 <- mu_seq[which.max(y2)]
+    print(paste("Max värde =", m_max2))
+```
+
+```{r}
     hist(y1)
-    y2 <- dgamma(x2, shape = alpha_max_x2, scale = beta_max_x2)
+    y2 <- dgamma(x2, shape = a_max2, scale = b_max2)
     hist(y2)
 
-    y3 <- dnorm(x1, mean = mu_max_x1, sd = 1)
+    y3 <- dnorm(x1, mean = m_max1, sd = 1)
     hist(y3)
-    y4 <- dnorm(x2, mean = mu_max_x2, sd = 1)
+    y4 <- dnorm(x2, mean = m_max2, sd = 1)
     hist(y4)
 
     hist(x1)
@@ -200,7 +207,7 @@ print(norm_sigma2_mle(y10000))
   log_likelihood_beta <- function(params, data) {
     alpha <- params[1]
     beta <- params[2]
-    log_likelihood <- sum(dbeta(data, shape1 = alpha, shape2 = beta, log = TRUE))
+    log_likelihood <- sum(dbeta(data, alpha, beta, log = TRUE))
     return(-log_likelihood)  # Returnera negativt värde eftersom optim() minimiserar
   }
 
@@ -210,11 +217,6 @@ print(norm_sigma2_mle(y10000))
 ```{r }
   simulated_data <- rbeta(100, shape1 = 0.2, shape2 = 2)
   hist(simulated_data)
-```
-###3
-```{r }
-    opt_res <- optim(par = c(1, 1), fn = log_likelihood_beta, x = simulated_data, method = "L-BFGS-B", lower = 0.000001)
-    print(opt_res$par)
 ```
 
 ##3.4.1
