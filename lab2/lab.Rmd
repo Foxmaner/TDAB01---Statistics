@@ -31,9 +31,13 @@
   for(beta in beta_values){
     y2 <- c(y2, llgama(x2, alpha, beta))
   }
-  plot(beta_values,y1)
-  plot(beta_values,y2)
-
+    plot(beta_values, y1)
+    max1 <- beta_values[which.max(y1)]
+    print(paste("Max värde =", max1))
+    plot(beta_values, y2)
+    max2 <- beta_values[which.max(y2)]
+    print(paste("Max värde =", max2))
+    
 
 ```
 
@@ -51,8 +55,12 @@
   for(alpha in alpha_values){
     y2 <- c(y2, llgama(x2, alpha, beta))
   }
-  plot(alpha_values,y1)
-  plot(alpha_values,y2)
+    plot(alpha_values, y1)
+    max1 <- alpha_values[which.max(y1)]
+    print(paste("Max värde =", max1))
+    plot(alpha_values, y2)
+    max2 <- alpha_values[which.max(y2)]
+    print(paste("Max värde =", max2))
 
 
 ```
