@@ -202,4 +202,71 @@ print(norm_sigma2_mle(y10000))
 
 ##3.4.1
 ###1
+```{r }
+    n <- 2000
+    beta1 <- numeric(n)
+    beta2 <- numeric(n)
+    m1 <- numeric(n)
+    m2 <- numeric(n)
+    sigma1 <- numeric(n)
+    sigma2 <- numeric(n)
+
+    for (i in 1:n) {
+      
+      
+        y1 <- rnorm(n = 10, mean = 10, sd = 2)
+        y2 <- rnorm(n = 10000, mean = 10, sd = 2)
+        m1[i] <- norm_mu_mle(x = y1)
+        m2[i] <- norm_mu_mle(x = y2)
+        sigma1[i] <- norm_sigma2_mle(x = y1)
+        sigma2[i] <- norm_sigma2_mle(x = y2)
+        x1 <- rgamma(n = 10, shape = 4, rate = 1)
+        x2 <- rgamma(n = 10000, shape = 4, rate = 1)
+        beta1[i] <- gamma_beta_mle(x = x1, alpha = 4)
+        beta2[i] <- gamma_beta_mle(x = x2, alpha = 4)
+
+        
+    }
+    
+    hist(beta1)
+    hist(beta2)
+    hist(sigma1)
+    hist(sigma2)
+    hist(m1)
+    hist(m2)
+    
+```
+Vår slutsats är att när vi höjer värdet på n så minskar variansen.
 ###2
+```{r}
+    n <- 2000
+    
+    m1 <- numeric(n)
+    m2 <- numeric(n)
+    beta1 <- numeric(n)
+    beta2 <- numeric(n)
+    sigma1 <- numeric(n)
+    sigma2 <- numeric(n)
+    x1 <- rgamma(n = 10, shape = 4, rate = 1)
+    x2 <- rgamma(n = 10000, shape = 4, rate = 1)
+    y1 <- rnorm(n = 10, mean = 10, sd = 2)
+    y2 <- rnorm(n = 10000, mean = 10, sd = 2)
+
+  for (i in 1:n) {
+      sigma1[i] <- norm_sigma2_mle(x = sample(y1, 10, replace = TRUE))
+        sigma2[i] <- norm_sigma2_mle(x = sample(y2, 10000, replace = TRUE))
+        beta1[i] <- gamma_beta_mle(x = sample(x1, 10, replace = TRUE), alpha = 4)
+        beta2[i] <- gamma_beta_mle(x = sample(x2, 10000, replace = TRUE), alpha = 4)
+        m1[i] <- norm_mu_mle(x = sample(y1, 10, replace = TRUE))
+        m2[i] <- norm_mu_mle(x = sample(y2, 10000, replace = TRUE))
+        
+    }
+    hist(beta1)
+    hist(beta2)
+    hist(sigma1)
+  hist(sigma2)
+    hist(m1)
+    hist(m2)
+   
+```
+När vi inte längre använder oss a populationen utan istället kör på stickprov så kommer vår data ej bli lika exakt.
