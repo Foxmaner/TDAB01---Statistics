@@ -1,0 +1,15 @@
+---
+title: "Lab3"
+author: "Eskil & Björn"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r }
+normal <- rnorm(10,1,1)
+```
+
