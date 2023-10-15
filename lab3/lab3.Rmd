@@ -8,8 +8,110 @@ output: pdf_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+##3.1.1
 
+###1)
 ```{r }
-normal <- rnorm(10,1,1)
+    interval <- seq(-5, 15, 0.01)
+    y <- dt(x = interval, df = 1)
+    plot(interval, y, type="l")
+```
+###2)
+```{r }
+data <- c(11.3710, 9.4353, 10.3631, 10.6329, 10.4043, 9.8939, 11.5115)
+hist(data, xlim = c(-5,15))
+```
+###3)
+```{r }
+normal_log_likelyhood <- function(mu,data){
+  n <- length(data)
+  log_likelihood <- sum(dnorm(data, mean = mu, log = TRUE))
+  return(log_likelihood)
+}
+llik <- normal_log_likelyhood(5,data)
+round(llik,1)
+```
+
+###4)
+
+###5)
+```{r }
+    posterior <- function(mu, data) {
+        return(exp((-1/2)*sum((data - mu)^2)) / (1 + mu^2))
+    }
+
+    posterior_values <- c()
+    for (mu in interval) {
+        posterior_values <- c(posterior_values, posterior(mu, data))
+    }
+    plot(interval, posterior_values, type="l")
+```
+
+##3.2.1
+###1)
+Vi väljer att sätta prior till (1,1) eftersom att vi ej vet någon data sedan tidigare. Så alla fall är lika sannolika
+```{r }
+    a = 1
+    b = 1
+    interval <- seq(0, 1, 0.01)
+    prior_pa <- dbeta(x = interval, shape1 = alpha, shape2 = b)
+    prior_pb <- dbeta(x = interval, shape1 = beta, shape2 = b)
+    plot(interval, prior_pa, type="l")
+    plot(interval, prior_pb, type="l")
+```
+###2)
+```{r }
+#Antal personer som kollat på vardera produkt
+n_A <- 13
+n_B <- 3
+#Antal personer som var intresserade av vardera produkt
+i_a <- 8
+i_b <- 2
+
+#beräkna posterioren för produkt A
+alpha_post_A <- a + i_a
+beta_post_A <- b + n_A - i_a
+#beräkna posterioren för produkt B
+alpha_post_B <- a + i_b
+beta_post_B <- b + n_B - i_b
+#beräkna förväntade proportioner för de olika produkterna
+prop_post_A <- alpha_post_A / (alpha_post_A + beta_post_A)
+prop_post_B <- alpha_post_B / (alpha_post_B + beta_post_B)
+
+print("Sannolikhet intresserade i produkt A...")
+print(prop_post_A)
+print("Sannolikhet intresserade i produkt B...")
+print(prop_post_B)
+
+print("Vi ser att sannolikheten är precis likadan, så vi kan välja vilken som :D")
+
+```
+###3)
+```{r }
+n_total = 87
+
+# Simulera antal intresserade kunder för Produkt A
+simulated_customers_A <- rbinom(10000, n_total, prop_post_A)
+
+# Simulera antal intresserade kunder för Produkt B
+simulated_customers_B <- rbinom(10000, n_total, prop_post_B)
+
+prob_more_than_40_A <- mean(simulated_customers_A > 40)
+prob_more_than_40_B <- mean(simulated_customers_B > 40)
+
+print("A)")
+print("Sannolikhet att det är mer än 40 intresserade av produkt A")
+print(prob_more_than_40_A)
+print("Sannolikhet att det är mer än 40 intresserade av produkt B")
+print(prob_more_than_40_B)
+
+#Beräkna föräntat antal kunder
+expected_customers_A <- n_total * prop_post_A
+expected_customers_B <- n_total * prop_post_B
+print("B)")
+print("Förväntat antal kunder produkt A")
+expected_customers_A
+print("Förväntat antal kunder produkt B")
+expected_customers_B
 ```
 
