@@ -33,7 +33,15 @@ round(llik,1)
 ```
 
 ###4)
-
+Vi börjar med bayers sats
+$$ f(\theta \mid y) = f(y \mid \theta)*f(\theta) / f(y) $$
+#Eftersom att vi ska härleda posteriorn för mu så byter vi theta mot mu
+$$ f(\mu \mid y) = f(y \mid \mu)*f(\mu) / f(y) $$
+#Vi kan sedan förkorta bort de faktorer som ej inehåller mu
+$$ f(\mu \mid y) = f(y \mid \mu)*f(\mu) $$
+#Vi ersätter = med ∝ eftersom att de är propertionella mot varandra
+$$ f(\mu \mid y) ∝ f(y \mid \mu)*f(\mu) $$
+#Där har vi svaret!
 ###5)
 ```{r }
     posterior <- function(mu, data) {
