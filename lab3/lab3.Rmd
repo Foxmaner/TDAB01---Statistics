@@ -1,27 +1,29 @@
 ---
 title: "Lab3"
 author: "Eskil & Björn"
-date: "`r Sys.Date()`"
+date: "2023-10-11"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 ##3.1.1
 
 ###1)
+
 ```{r }
     interval <- seq(-5, 15, 0.01)
     y <- dt(x = interval, df = 1)
     plot(interval, y, type="l")
 ```
+
 ###2)
+
 ```{r }
 data <- c(11.3710, 9.4353, 10.3631, 10.6329, 10.4043, 9.8939, 11.5115)
 hist(data, xlim = c(-5,15))
 ```
+
 ###3)
+
 ```{r }
 normal_log_likelyhood <- function(mu,data){
   n <- length(data)
@@ -32,17 +34,13 @@ llik <- normal_log_likelyhood(5,data)
 round(llik,1)
 ```
 
-###4)
-Vi börjar med bayers sats
-$$ f(\theta \mid y) = f(y \mid \theta)*f(\theta) / f(y) $$
-#Eftersom att vi ska härleda posteriorn för mu så byter vi theta mot mu
-$$ f(\mu \mid y) = f(y \mid \mu)*f(\mu) / f(y) $$
-#Vi kan sedan förkorta bort de faktorer som ej inehåller mu
-$$ f(\mu \mid y) = f(y \mid \mu)*f(\mu) $$
-#Vi ersätter = med ∝ eftersom att de är propertionella mot varandra
-$$ f(\mu \mid y) ∝ f(y \mid \mu)*f(\mu) $$
-#Där har vi svaret!
+### 4) Vi börjar med Bayes sats
+$$ f(\theta \mid y) = f(y \mid \theta) \cdot f(\theta) / f(y) $$ #Eftersom att vi ska härleda posteriorn för mu så byter vi theta mot mu
+$$ f(\mu \mid y) = f(y \mid \mu) \cdot f(\mu) / f(y) $$ #Vi kan sedan förkorta bort de faktorer som ej innehåller mu
+$$ f(\mu \mid y) = f(y \mid \mu) \cdot f(\mu) $$ #Vi ersätter = med $$\propto$$ eftersom att de är proportionella mot varandra
+$$ f(\mu \mid y) \propto f(y \mid \mu) \cdot f(\mu) $$ #Där har vi svaret!
 ###5)
+
 ```{r }
     posterior <- function(mu, data) {
         return(exp((-1/2)*sum((data - mu)^2)) / (1 + mu^2))
@@ -55,19 +53,20 @@ $$ f(\mu \mid y) ∝ f(y \mid \mu)*f(\mu) $$
     plot(interval, posterior_values, type="l")
 ```
 
-##3.2.1
-###1)
-Vi väljer att sätta prior till (1,1) eftersom att vi ej vet någon data sedan tidigare. Så alla fall är lika sannolika
+##3.2.1 ###1) Vi väljer att sätta prior till (1,1) eftersom att vi ej vet någon data sedan tidigare. Så alla fall är lika sannolika
+
 ```{r }
     a = 1
     b = 1
     interval <- seq(0, 1, 0.01)
-    prior_pa <- dbeta(x = interval, shape1 = alpha, shape2 = b)
-    prior_pb <- dbeta(x = interval, shape1 = beta, shape2 = b)
+    prior_pa <- dbeta(x = interval, shape1 = a, shape2 = b)
+    prior_pb <- dbeta(x = interval, shape1 = b, shape2 = b)
     plot(interval, prior_pa, type="l")
     plot(interval, prior_pb, type="l")
 ```
+
 ###2)
+
 ```{r }
 #Antal personer som kollat på vardera produkt
 n_A <- 13
@@ -94,7 +93,9 @@ print(prop_post_B)
 print("Vi ser att sannolikheten är precis likadan, så vi kan välja vilken som :D")
 
 ```
+
 ###3)
+
 ```{r }
 n_total = 87
 
@@ -122,4 +123,3 @@ expected_customers_A
 print("Förväntat antal kunder produkt B")
 expected_customers_B
 ```
-
